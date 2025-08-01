@@ -78,7 +78,7 @@ function createUser() {
           <option  label="Role" value={r.role_name} onSelect={()=>{setRoleId(r.id)}} key={r.id}>{r.role_name}</option>
         ))}
       </select> */}
-      {/* <select
+      <select
   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
   onChange={(e) => setRoleId(e.target.value)} // Use onChange to update roleId
 >
@@ -87,7 +87,7 @@ function createUser() {
       {r.role_name}
     </option>
   ))}
-</select> */}
+</select>
       {/* <ul>
         {role.map((todo) => (
           <li key={todo.id}>{todo.role_name}</li>
