@@ -23,10 +23,15 @@ const client = generateClient<Schema>();
   const [roleId, setRoleId] = useState("" as string);
   const [role, setRole] = useState<Array<Schema["Role"]["type"]>>([]);
 
-  function listRoles() {
-    client.models.Role.observeQuery().subscribe({
-      next: (data) => setRole([...data.items]),
-    });
+//   const { data: roles, errors } = [];
+
+  async function listRoles() {
+    // client.models.Role.().subscribe({
+    //   next: (data) => setRole([...data.items]),
+    
+    // });
+    const { data: roles, errors } = await client.models.Role.list();
+    setRole(roles);
   }
 
   useEffect(() => {
@@ -67,8 +72,8 @@ function createUser() {
         <input type="email" id="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
     </div>
     <div className="mb-2">
-    <select className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         <label form="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+    <select className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {role.map((r) => (
           <option  label="Role" onSelect={()=>{setRoleId(r.id)}} key={r.id}>{r.role_name}</option>
         ))}
